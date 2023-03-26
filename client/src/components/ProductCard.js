@@ -6,6 +6,7 @@ import {BiPlusCircle,BiMinusCircle} from 'react-icons/bi'
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
 
 
 const ProductCard=({id,imgUrl,title,price})=>{
@@ -13,8 +14,9 @@ const ProductCard=({id,imgUrl,title,price})=>{
   const [amount,setAmount]=useState(0)
   const [addState,setAddState]=useState(true)
   const [btnState,setBtnState]=useState('Add')
+  const navigate = useNavigate()
 
-  // useEffect(()=>{productState()},[])
+  // useEffect(()=>{},[productCart])
 
   const minusAmount=()=>{
     if(amount!=0){
@@ -30,11 +32,13 @@ const ProductCard=({id,imgUrl,title,price})=>{
   const productState=()=>{
     const newProdCart=[...productCart]
     if(addState){
-      const addProd={id,title,amount,imgUrl,price}
+      const key=id
+      const addProd={key,id,title,amount,imgUrl,price}
       newProdCart.push(addProd)
       setProductCart(newProdCart)
       setAddState(false)
       setBtnState('Update')
+      console.log(productCart)
     }
     else{
       if(amount===0){
@@ -59,6 +63,7 @@ const ProductCard=({id,imgUrl,title,price})=>{
       <div className="product-card">
           <div className="product-image">
             <img
+            onClick={()=>{navigate(`products/${id}`)}}
               src={imgUrl}
             />
           </div>

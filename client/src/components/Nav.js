@@ -17,7 +17,7 @@ const Nav = () => {
       <nav className="product-filter">
       <CartDrawer open={cartOpen} onClose={onClose}></CartDrawer>
       <Button  onClick={()=>{setCartOpen(true)}} variant="contained"><BsCart3/></Button>
-      <h1>Jackets</h1>
+      <h1>GoCode Shop</h1>
       <Sort/>
       </nav>
     )

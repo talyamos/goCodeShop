@@ -13,7 +13,9 @@ function App() {
   const [productCart,setProductCart]=useState([])
 
   const fetchProducts=async function(){
-    const response=await fetch("https://fakestoreapi.com/products")
+    // const response=await fetch("https://gocodeshoptalya.onrender.com/api/getAllProducts")
+    const response=await fetch("http://localhost:8000/api/getAllProducts")
+    // const response=await fetch("https://fakestoreapi.com/products")
     const json= await response.json()
     setProductsData(json)
     setAllProduct(json)

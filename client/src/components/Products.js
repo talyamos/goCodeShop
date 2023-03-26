@@ -12,8 +12,8 @@ const Products=()=>{
         {
         productsData.map((product)=>{
           return <ProductCard
-          key={product.id}
-          id={product.id}
+          key={product._id}
+          id={product._id}
           imgUrl={product.image}
           title={product.title}
           price={product.price}
