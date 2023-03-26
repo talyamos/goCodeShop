@@ -1,0 +1,18 @@
+.MainDiv{
+    margin: 50px;
+    display:inline-flex;
+}
+.DivInfo{
+    /* background-color: red; */
+    float: left;
+}
+.DivImg{
+    float: right;
+}
+.Img{
+    width: 600px;
+}
+.Title{
+    font-size:xx-large;
+    font-family: 'Lucida Sans';
+}

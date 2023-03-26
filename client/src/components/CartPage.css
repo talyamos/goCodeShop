@@ -1,0 +1,23 @@
+.TopDiv{
+    display: flex;
+    padding: 40px 0;
+    margin: 30px;
+    /* background-color: rebeccapurple; */
+}
+.Page{
+    /* background-color: aqua; */
+}
+.Products{
+    /* background-color: blue; */
+    margin: 30px;
+    padding: 40px;
+    
+}
+.Products>*{
+    display: inline-flex;
+}
+.Title{
+    display: flex;
+    font-size: xx-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

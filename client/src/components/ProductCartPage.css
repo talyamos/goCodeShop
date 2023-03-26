@@ -1,0 +1,40 @@
+
+.ProductP{
+    /* background-color: red; */
+    float: left;
+    display: flex;
+    align-items: center;
+    width: 800px;
+    height: 80px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.ProductP>*{
+    margin: 5px;
+    display: inline-flex;
+}
+.ProdImgP{
+    width: 75px;
+    height: 75px;
+    float: right;
+}
+.DecimalP{
+    font-size: 70%;
+    top: -0.5em;
+}
+.PriceDivP{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 10px;
+}
+
+.InfoProDivP{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 20px;
+    margin-right: 20px;
+    align-items: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: beige; */
+}
