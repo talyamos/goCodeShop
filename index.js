@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv"
+import cors from "cors"
 dotenv.config()
 const { PORT, DB_USER,DB_PASS,DB_HOST,DB_NAME } = process.env
 const app = express();
@@ -8,7 +9,7 @@ const app = express();
 mongoose.set('strictQuery', true)
 app.use(express.json());
 app.use(express.static("client/build"))
-
+app.use(cors())
 
 
 // CRUD
@@ -26,6 +27,10 @@ const productSchema=new mongoose.Schema({
         type:Number ,
         required:true
     },
+    description:{
+        type:String,
+        required: true
+    },
     category:{
         type:String,
         required: true
@@ -34,6 +39,16 @@ const productSchema=new mongoose.Schema({
         type:String,
         required: true
     },
+    // rating:{
+    //     rate:{
+    //         type:Number ,
+    //         required:true
+    //     },
+    //     count:{
+    //         type:Number,
+    //         required:true
+    //     }
+    // },
     dateCreated:{
         type:Date,
         default:Date.now()
