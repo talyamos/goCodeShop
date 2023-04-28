@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv"
 import cors from "cors"
+import { addProductController,addProductsController,getProductByIdController,getProductsByCatController,getAllProductsController,updateProductController,deleteProductController } from "./controllers/Product.js";
 dotenv.config()
 const { PORT, DB_USER,DB_PASS,DB_HOST,DB_NAME } = process.env
 const app = express();
@@ -11,145 +12,19 @@ app.use(express.json());
 app.use(express.static("client/build"))
 app.use(cors())
 
-
 // CRUD
 // create - post - more secured so login \ register will also go with post
 // read - get
 // update - put \ patch
 // delete - delete
 
-const productSchema=new mongoose.Schema({
-    title:{
-        type:String,
-        required: true
-    },
-    price:{
-        type:Number ,
-        required:true
-    },
-    description:{
-        type:String,
-        required: true
-    },
-    category:{
-        type:String,
-        required: true
-    },
-    image:{
-        type:String,
-        required: true
-    },
-    // rating:{
-    //     rate:{
-    //         type:Number ,
-    //         required:true
-    //     },
-    //     count:{
-    //         type:Number,
-    //         required:true
-    //     }
-    // },
-    dateCreated:{
-        type:Date,
-        default:Date.now()
-    }
-})
-const Product=mongoose.model('Product',productSchema)
-
-
-app.post("/api/addProduct",async (req,res)=>{
-    try{
-        const newProduct = {...req.body};
-        const createProduct=new Product(newProduct)
-        await createProduct.save()
-        res.send(createProduct);
-    }
-    catch(e){
-        console.log(e)
-        res.status(500).send(e.message)
-    }
-})
-
-app.post("/api/addProducts", async (req,res)=>{
-    try{
-        const newProducts = [...req.body];
-        const createProducts= await Product.insertMany(newProducts)
-        res.send(createProducts);
-    }
-    catch(e){
-        console.log(e)
-        res.status(500).send(e.message)
-    }
-})
-
-
-app.get('/api/getProductById/:productId/',async (req,res)=>{
-    try{
-        const {productId} = req.params;
-        const prod = await Product.findOne({_id: productId})
-        if(!prod){
-            res.status(404).send({message: "no such product with the specific id"})
-        }
-        res.send(prod)
-    }
-    catch(e){
-        console.log(e)
-        res.status(500).send(e.message)
-    }
-})
-
-app.get('/api/getProductByCat/:category/',async (req,res)=>{
-    try{
-        const selectedCat = req.params.category;
-        const prods = await Product.find({category: selectedCat})
-        if(!prods){
-            res.status(404).send({message: "no such product with the specific category"})
-        }
-        res.send(prods)
-    }
-    catch(e){
-        console.log(e)
-        res.status(500).send(e.message)
-    }
-})
-
-app.get("/api/getAllProducts", async (req,res) => {
-    try{
-      const products = await Product.find({})
-      res.send(products)
-    } catch(e){
-      console.log(e)
-      res.status(500).send(e.message)
-    }
-  })
-
-app.put('/api/updatePrice/:productId/',async (req,res)=>{
-    try{
-        const { productId } = req.params;
-        const newPrice =  {...req.body} ;
-        const newProduct =  await Product.findOne({_id: productId}) 
-        newProduct.price=newPrice.price
-        res.send(newProduct);
-    }catch(e){
-        console.log(e)
-        res.status(500).send(e.message)
-    }
-})
-
-app.delete("/api/deleteProduct/:productId/",async (req,res)=>{
-    try{ 
-        const { productId } = req.params;
-        const prod = await Product.findOneAndDelete({_id: productId});
-        if(!prod){
-            res.status(404).send({message: "no such product with the specific id"})
-        }
-        res.send(prod)
-    }
-    catch(e){
-        console.log(e)
-        res.status(500).send(e.message)
-      }
-})
+app.post("/api/addProduct",addProductController)
+app.post("/api/addProducts",addProductsController)
+app.get('/api/getProductById/:productId/',getProductByIdController)
+app.get('/api/getProductsByCat/:category/',getProductsByCatController)
+app.get("/api/getAllProducts", getAllProductsController)
+app.put('/api/updateProduct/:productId/',updateProductController)
+app.delete("/api/deleteProduct/:productId/",deleteProductController)
 
 app.get("*", (req, res) => {
     res.sendFile(__dirname + "/client/build/index.html");

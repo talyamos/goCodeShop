@@ -1,0 +1,32 @@
+.AdminPage{
+    /* background-color: red; */
+    margin: 50px;
+}
+.ImgTable{
+    width: 75px;
+    height: auto;
+}
+.FormImage{
+    width: 100px;
+    height: auto;
+    margin-top: 10px;
+}
+.ImageDivForm>*{
+    display: inline-flex;
+}
+.ProdTitleInTable{
+    cursor: pointer;
+}
+.APTopDiv{
+    display: flex;
+    padding: 30px 0;
+    margin: 20px;
+    /* background-color: rebeccapurple; */
+    align-items: center;
+}
+.AddProdBtn{
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}

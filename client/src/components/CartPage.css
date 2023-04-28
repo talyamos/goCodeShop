@@ -3,6 +3,7 @@
     padding: 40px 0;
     margin: 30px;
     /* background-color: rebeccapurple; */
+    align-items: center;
 }
 .Page{
     /* background-color: aqua; */
@@ -20,4 +21,8 @@
     display: flex;
     font-size: xx-large;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.ImgCartTable{
+    width: 75px;
+    height: auto;
 }

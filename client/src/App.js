@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 import CartDrawer from './components/CartDrawer';
 import Main from './components/Main';
@@ -31,7 +32,7 @@ function App() {
 
   return (
     <MyContext.Provider value={{productsData, setProductsData,allProducts,setAllProduct,
-    productCart,setProductCart,copyProductsData,setCopyProductsData,categories}}>
+      productCart,setProductCart,copyProductsData,setCopyProductsData,categories}}>
     <div className="App">
       <Main/>
     </div>
