@@ -21,17 +21,10 @@ import MenuItem from "@mui/material/MenuItem";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 
-import MyContext from "../MyContext";
-import { useContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { jsx } from "@emotion/react";
-import { ImageListItem } from "@mui/material";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
-  // const { allProducts } = useContext(MyContext);
-  // console.log(allProducts)
   const navigate = useNavigate();
 
   const [productsData, setProductsData] = useState([]);
@@ -39,14 +32,12 @@ const AdminPage = () => {
   const [delProd, setDelProd] = React.useState(0);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [rows, setRows] = useState([]);
   const [openEdit, setOpenEdit] = React.useState(false);
   const [editProd, setEditProd] = useState({});
   const [categories, setCategories] = useState([]);
   const [formState, setFormState] = useState("Update");
 
   useEffect(() => {
-    //להביא במקום הפונקציה הזאת את המוצרים מהיוז קונטקסט
     fetch("http://localhost:8000/api/getAllProducts")
       .then((response) => response.json())
       .then((data) => setProductsData(data));
@@ -57,13 +48,10 @@ const AdminPage = () => {
       .map((p) => p.category)
       .filter((value, index, array) => array.indexOf(value) === index);
     setCategories(newCategories);
-    //להביא במקום הפונקציה הזאת את הקטגוריות מהיוז קונטקסט
   }, [productsData]);
-  console.log(productsData);
-  console.log(categories);
 
   const columns = [
-    { id: "title", label: "Name", minWidth: 150, align: "center" },
+    { id: "title", label: "Title", minWidth: 150, align: "center" },
     { id: "category", label: "Category", minWidth: 120, align: "center" },
     { id: "price", label: "Price", minWidth: 100, align: "center" },
     { id: "description", label: "Description", minWidth: 250, align: "center" },
@@ -96,11 +84,7 @@ const AdminPage = () => {
   const handleDeleteClose = () => {
     fetch(`http://localhost:8000/api/deleteProduct/${delProd}`, {
       method: "DELETE",
-    }).then((result) => {
-      result.json().then((resp) => {
-        console.warn(resp);
-      });
-      console.log(productsData);
+    }).then(() => {
       setProductsData(
         productsData.filter((product) => product._id !== delProd)
       );
@@ -119,12 +103,11 @@ const AdminPage = () => {
           description: editProd.description,
           category: editProd.category,
           image: editProd.image,
-          // dateCreated: Date.now(),
         }),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          setProductsData((prevData) => [...prevData, data]);
         })
         .catch((error) => console.error(error));
       setOpenEdit(false);
@@ -144,9 +127,6 @@ const AdminPage = () => {
         }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
         .catch((error) => {
           console.error(error);
         });
@@ -156,8 +136,6 @@ const AdminPage = () => {
   };
 
   const handleCategoryChange = (event) => {
-    // const p = editProd;
-    // // p.category = event.target.value;
     const newCategory = event.target.value;
     setEditProd({ ...editProd, category: newCategory });
   };
@@ -332,8 +310,8 @@ const AdminPage = () => {
             autoFocus
             required
             margin="dense"
-            id="name"
-            label="Name"
+            id="title"
+            label="Title"
             type="string"
             fullWidth
             variant="standard"

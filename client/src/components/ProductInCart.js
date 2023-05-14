@@ -1,6 +1,5 @@
 import './ProductInCart.css';
-import {BiPlusCircle,BiMinusCircle} from 'react-icons/bi'
-import { IconButton } from '@mui/material';
+
 
 
 
@@ -28,7 +27,7 @@ const ProductInCart = ({name,amount,imgUrl,price}) => {
             <p>{name}</p>
             <p>{amount}</p>
         </div> 
-        <img className="ProdImg" src={imgUrl}></img>
+        <img className="ProdImg" src={imgUrl} alt=''></img>
     </div>
     )
 }

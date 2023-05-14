@@ -11,8 +11,9 @@
 }
 .Img{
     width: 600px;
+    margin-left: 10px;
 }
 .Title{
-    font-size:xx-large;
+    align-self: center;
     font-family: 'Lucida Sans';
 }
