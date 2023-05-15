@@ -11,7 +11,7 @@ const ProductPage = () => {
   const { productId } = useParams();
   const fetchSingleProduct = async () => {
     const response = await fetch(
-      `http://localhost:8000/api/getProductById/${productId}`
+      `https://gocodeshoptalya.onrender.com/api/getProductById/${productId}`
     );
     const data = await response.json();
     setChosenProduct(data);
