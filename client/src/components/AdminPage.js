@@ -82,7 +82,7 @@ const AdminPage = () => {
   };
 
   const handleDeleteClose = () => {
-    fetch(`http://localhost:8000/api/deleteProduct/${delProd}`, {
+    fetch(`https://gocodeshoptalya.onrender.com/api/deleteProduct/${delProd}`, {
       method: "DELETE",
     }).then(() => {
       setProductsData(
@@ -94,7 +94,7 @@ const AdminPage = () => {
 
   const handleEdit = () => {
     if (formState === "Add") {
-      fetch(`http://localhost:8000/api/addProduct`, {
+      fetch(`https://gocodeshoptalya.onrender.com/api/addProduct`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -114,18 +114,21 @@ const AdminPage = () => {
       setFormState("Update");
       setEditProd({});
     } else {
-      fetch(`http://localhost:8000/api/updateProduct/${editProd._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: editProd.title,
-          category: editProd.category,
-          price: editProd.price,
-          description: editProd.description,
-          image: editProd.image,
-          dateCreated: editProd.dateCreated,
-        }),
-      })
+      fetch(
+        `https://gocodeshoptalya.onrender.com/api/updateProduct/${editProd._id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: editProd.title,
+            category: editProd.category,
+            price: editProd.price,
+            description: editProd.description,
+            image: editProd.image,
+            dateCreated: editProd.dateCreated,
+          }),
+        }
+      )
         .then((response) => response.json())
         .catch((error) => {
           console.error(error);
